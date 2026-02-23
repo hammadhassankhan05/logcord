@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "logcord"
+version = "0.1.0"
+authors = [
+  { name="Hammad Hassan Khan", email="contact@zargosoft.com" },
+]
+description = "A lightweight, thread-safe logging handler for sending Python logs to Discord via webhooks."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = [
+    "requests>=2.25.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/hammadhassankhan05/logcord"
+"Bug Tracker" = "https://github.com/hammadhassankhan05/logcord/issues"

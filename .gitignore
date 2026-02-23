@@ -1,0 +1,37 @@
+# Environments
+.env
+.venv/
+venv/
+env/
+ENV/
+
+# Python built-in files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyPI Build and Distribution artifacts
+build/
+dist/
+*.egg-info/
+.eggs/
+MANIFEST
+
+# Logging and Testing Outputs
+*.log
+*.sqlite3
+*.csv
+*.json
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Tests
+test.py
