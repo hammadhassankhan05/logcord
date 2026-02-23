@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "logcord"
-version = "0.1.0"
+version = "0.1.1"
 authors = [
   { name="Hammad Hassan Khan", email="contact@zargosoft.com" },
 ]
