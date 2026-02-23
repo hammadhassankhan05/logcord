@@ -10,12 +10,6 @@ Perfect for monitoring background tasks, web scrapers, automated pipelines, or s
 pip install logcord
 ```
 
-# Quick Start
-```python
-import logging
-from logcord.handler import DiscordWebhookHandler
-```
-
 ## How It Works Under the Hood
 
 The `DiscordWebhookHandler` is designed to have zero impact on your main application's performance.
@@ -25,7 +19,7 @@ The `DiscordWebhookHandler` is designed to have zero impact on your main applica
 3. **Smart Batching & Chunking:** The background worker stitches multiple short logs together into a single message to minimize HTTP requests. If a single log (like a massive traceback) exceeds Discord's character limit, it automatically chunks it into multiple sequential messages.
 4. **Rate Limit Handling:** If Discord returns a HTTP `429 Too Many Requests` status, the handler pauses execution for the exact `retry_after` period requested by Discord before continuing, ensuring no logs are dropped.
 
-## Advanced Usage: Dual Logging
+## Usage: Dual Logging
 
 For production scripts like web scraping pipelines, automated pricing tools, or forecasting systems, you typically want to log to the console for local debugging, while sending only critical warnings and errors to Discord. 
 
@@ -33,7 +27,7 @@ Here is how you configure the handler to only forward `WARNING` level and above 
 
 ```python
 import os
-from logcord import setup_logger, shutdown
+from logcord import setup_logger, shutdown_logs
 
 # 1. Setup logger using simple strings
 webhook_url = os.environ.get("DISCORD_WEBHOOK_URL")
