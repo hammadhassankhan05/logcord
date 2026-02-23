@@ -11,14 +11,27 @@ class DiscordWebhookHandler(logging.Handler):
     """
 
     def __init__(
-        self, webhook_url: str, flush_interval: float = 3.0, max_chars: int = 1900
+        self,
+        webhook_url: str,
+        flush_interval: float = 3.0,
+        max_chars: int = 1900,
+        message_format: str = "text",
     ):
+        """
+        Initializes the handler with the given webhook URL and configuration.
+
+        Args:
+            webhook_url: The Discord webhook URL to send logs to.
+            flush_interval: How often (in seconds) to flush the log queue. Defaults to 3.0.
+            max_chars: Maximum characters per Discord message. Defaults to 1900 (Discord limit is 2000).
+            message_format: Format for message content: "text" or "code". Defaults to "text".
+        """
         super().__init__()
         self.webhook_url = webhook_url
         self.flush_interval = flush_interval
         # Discord limit is 2000; keeping it at 1900 allows room for formatting
         self.max_chars = max_chars
-
+        self.message_format = message_format
         self._log_queue = queue.Queue()
         self._stop_event = threading.Event()
 
@@ -95,8 +108,11 @@ class DiscordWebhookHandler(logging.Handler):
         if not content:
             return
 
-        # Wrap in a code block for cleaner formatting in Discord
-        payload = {"content": f"```text\n{content}\n```"}
+            # Wrap in a code block for cleaner formatting in Discord
+        if self.message_format == "code":
+            payload = {"content": f"```\n{content}\n```"}
+        elif self.message_format == "text":
+            payload = {"content": f"\n{content}\n"}
 
         try:
             response = requests.post(self.webhook_url, json=payload, timeout=10)
